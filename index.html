@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Bike Thing – A Customer's Documented Experience</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0d0d0d;
+    --off-white: #f5f0e8;
+    --cream: #ede8dc;
+    --red: #c0392b;
+    --red-dark: #922b21;
+    --red-muted: #e8c5c1;
+    --ink: #1a1a1a;
+    --mid: #5a5a5a;
+    --rule: #c8c0b0;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--off-white);
+    color: var(--ink);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 300;
+    line-height: 1.75;
+    font-size: 17px;
+    overflow-x: hidden;
+  }
+
+  /* ── MASTHEAD ── */
+  .masthead {
+    background: var(--black);
+    color: var(--off-white);
+    padding: 60px 40px 50px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .masthead::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 39px,
+      rgba(255,255,255,0.04) 39px,
+      rgba(255,255,255,0.04) 40px
+    );
+    pointer-events: none;
+  }
+  .masthead-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.1s forwards;
+  }
+  .masthead h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 900;
+    font-size: clamp(2.2rem, 6vw, 4.2rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--off-white);
+    opacity: 0;
+    animation: fadeUp 0.7s 0.2s forwards;
+  }
+  .masthead h1 em {
+    color: var(--red);
+    font-style: italic;
+  }
+  .masthead-sub {
+    margin-top: 20px;
+    font-size: 1.05rem;
+    color: #a09890;
+    font-weight: 300;
+    font-style: italic;
+    max-width: 560px;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.35s forwards;
+  }
+  .masthead-rule {
+    width: 60px;
+    height: 2px;
+    background: var(--red);
+    margin: 28px auto 0;
+    opacity: 0;
+    animation: fadeUp 0.5s 0.5s forwards;
+  }
+
+  /* ── INTRO BAND ── */
+  .intro-band {
+    background: var(--red);
+    color: white;
+    padding: 22px 40px;
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .intro-band strong { font-weight: 500; }
+
+  /* ── LAYOUT ── */
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  /* ── STATEMENT SECTION ── */
+  .statement {
+    padding: 70px 0 50px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 18px;
+  }
+  .statement-lead {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.4rem, 3vw, 1.9rem);
+    font-weight: 700;
+    line-height: 1.4;
+    color: var(--black);
+    margin-bottom: 28px;
+  }
+  .statement p {
+    color: #3a3a3a;
+    margin-bottom: 18px;
+    font-size: 1.05rem;
+  }
+
+  /* ── KEY FACTS BOX ── */
+  .facts-box {
+    background: var(--black);
+    color: var(--off-white);
+    border-radius: 2px;
+    padding: 36px 40px;
+    margin: 50px 0;
+  }
+  .facts-box .section-label { color: var(--red); margin-bottom: 22px; }
+  .facts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 28px;
+  }
+  .fact-item {}
+  .fact-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--red);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .fact-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #a09890;
+  }
+
+  /* ── TIMELINE ── */
+  .timeline-section {
+    padding: 60px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .timeline-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--black);
+  }
+  .timeline-section .intro-text {
+    color: var(--mid);
+    font-style: italic;
+    margin-bottom: 48px;
+    font-size: 0.95rem;
+  }
+  .timeline { position: relative; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--red), var(--rule));
+  }
+  .timeline-item {
+    padding-left: 36px;
+    padding-bottom: 52px;
+    position: relative;
+  }
+  .timeline-item:last-child { padding-bottom: 0; }
+  .timeline-dot {
+    position: absolute;
+    left: -7px;
+    top: 4px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--off-white);
+    border: 2px solid var(--red);
+  }
+  .timeline-dot.red { background: var(--red); }
+  .timeline-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 8px;
+  }
+  .timeline-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 10px;
+  }
+  .timeline-body {
+    color: #3a3a3a;
+    font-size: 0.97rem;
+    line-height: 1.7;
+  }
+  .timeline-body strong { color: var(--black); font-weight: 600; }
+  .timeline-body em { color: var(--red-dark); font-style: italic; }
+  .tag {
+    display: inline-block;
+    background: var(--red-muted);
+    color: var(--red-dark);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 2px;
+    margin-bottom: 10px;
+  }
+  .tag.black {
+    background: var(--black);
+    color: var(--off-white);
+  }
+
+  /* ── EMAIL CHAIN SECTION ── */
+  .emails-section {
+    padding: 60px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .emails-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .emails-section .intro-text {
+    color: var(--mid);
+    font-style: italic;
+    margin-bottom: 40px;
+    font-size: 0.95rem;
+  }
+
+  .email-card {
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    margin-bottom: 24px;
+    overflow: hidden;
+    background: white;
+    transition: box-shadow 0.2s;
+  }
+  .email-card:hover { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
+  .email-header {
+    background: var(--cream);
+    padding: 16px 22px;
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .email-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 14px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .avatar-abt { background: var(--black); color: var(--red); }
+  .avatar-jg { background: var(--red); color: white; }
+  .email-meta { flex: 1; }
+  .email-from {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--black);
+    margin-bottom: 2px;
+  }
+  .email-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--mid);
+    letter-spacing: 0.08em;
+  }
+  .email-body {
+    padding: 22px 24px;
+    font-size: 0.93rem;
+    line-height: 1.75;
+    color: #2a2a2a;
+    white-space: pre-line;
+  }
+  .email-body .highlight {
+    background: #ffeaea;
+    border-left: 3px solid var(--red);
+    padding: 10px 14px;
+    margin: 14px 0;
+    font-style: italic;
+    color: var(--red-dark);
+    border-radius: 0 2px 2px 0;
+  }
+  .chain-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin: 36px 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  /* ── VERDICT ── */
+  .verdict-section {
+    padding: 60px 0 50px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .verdict-box {
+    border: 2px solid var(--red);
+    padding: 40px;
+    border-radius: 2px;
+    position: relative;
+  }
+  .verdict-box .section-label { margin-bottom: 16px; }
+  .verdict-box p {
+    font-size: 1rem;
+    color: #3a3a3a;
+    margin-bottom: 16px;
+    line-height: 1.75;
+  }
+  .verdict-box p:last-child { margin-bottom: 0; }
+  .verdict-box strong { color: var(--red-dark); }
+
+  /* ── CALL TO ACTION ── */
+  .cta-section {
+    padding: 60px 0;
+    text-align: center;
+    background: var(--cream);
+    margin: 0 -28px;
+    padding-left: 28px;
+    padding-right: 28px;
+  }
+  .cta-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--black);
+  }
+  .cta-section p {
+    color: var(--mid);
+    font-style: italic;
+    max-width: 520px;
+    margin: 0 auto 28px;
+    font-size: 0.97rem;
+  }
+  .cta-links {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .cta-btn {
+    display: inline-block;
+    padding: 12px 26px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+  .cta-btn.primary { background: var(--red); color: white; }
+  .cta-btn.primary:hover { background: var(--red-dark); }
+  .cta-btn.secondary { background: var(--black); color: var(--off-white); }
+  .cta-btn.secondary:hover { background: #2a2a2a; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--black);
+    color: #666;
+    text-align: center;
+    padding: 30px 28px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    line-height: 1.9;
+  }
+  footer a { color: var(--red); text-decoration: none; }
+
+  /* ── ANIMATION ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .masthead { padding: 44px 22px 36px; }
+    .facts-box { padding: 28px 22px; }
+    .verdict-box { padding: 28px 22px; }
+    .email-header { flex-direction: column; gap: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="masthead-eyebrow">Documented Consumer Experience · Order #144152</div>
+  <h1>A Bike Thing<br><em>& the Art of "No Exceptions"</em></h1>
+  <p class="masthead-sub">How a UK retailer caused a customs failure with an undeclared candy — then refused to refund a customer who never received their product.</p>
+  <div class="masthead-rule"></div>
+</div>
+
+<!-- INTRO BAND -->
+<div class="intro-band">
+  <strong>£226.04 paid.</strong> &nbsp;·&nbsp; Product never received. &nbsp;·&nbsp; Refund refused for 40+ days. &nbsp;·&nbsp; Reason: "No exceptions."
+</div>
+
+<!-- STATEMENT -->
+<div class="container">
+  <section class="statement">
+    <div class="section-label">Why this page exists</div>
+    <p class="statement-lead">This is not a review. It is a documented record of how A Bike Thing (abikething.com) handled — and continues to handle — a situation entirely caused by their own error.</p>
+    <p>In February 2026, I ordered two motorcycle accessories from A Bike Thing, a UK-based retailer. They shipped my order to Mexico, but included an undeclared food item (a candy) inside the package — an item not listed on the commercial invoice. Mexican customs rejected the shipment entirely because of this undeclared item. The package was never delivered to me.</p>
+    <p>From the moment I reported this, A Bike Thing's response has been the same, repeated phrase: <strong>"No exceptions."</strong> Not an apology that was backed by action. Not a refund. Not a reship. Just a policy, applied rigidly to a problem they created.</p>
+    <p>Over 40 days later, I have not received my money back. Every email exchange is documented on this page, in chronological order, for anyone to read.</p>
+  </section>
+</div>
+
+<!-- KEY FACTS -->
+<div class="container">
+  <div class="facts-box">
+    <div class="section-label">The numbers at a glance</div>
+    <div class="facts-grid">
+      <div class="fact-item">
+        <div class="fact-value">£226.04</div>
+        <div class="fact-label">Total amount paid</div>
+      </div>
+      <div class="fact-item">
+        <div class="fact-value">40+</div>
+        <div class="fact-label">Days without refund</div>
+      </div>
+      <div class="fact-item">
+        <div class="fact-value">0</div>
+        <div class="fact-label">Times product received</div>
+      </div>
+      <div class="fact-item">
+        <div class="fact-value">2×</div>
+        <div class="fact-label">"No exceptions" stated</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TIMELINE -->
+<div class="container">
+  <section class="timeline-section">
+    <div class="section-label">Chronological record</div>
+    <h2>What Happened, Step by Step</h2>
+    <p class="intro-text">Every date below corresponds to documented email communication, available in full in the next section.</p>
+
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">February 17, 2026</div>
+        <div class="tag black">Order placed</div>
+        <div class="timeline-title">Purchase made — £226.04 charged to American Express</div>
+        <div class="timeline-body">
+          Order #144152 placed on abikething.com for a <strong>HEX ezCAN II Controller</strong> (£161.49) and a <strong>HEX ezCAN Harness Extension Kit</strong> (£45.12), plus £19.43 DHL Express Worldwide shipping. Payment processed via credit card. Order shipped same day via DHL, tracking number 1209862780.
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot red"></div>
+        <div class="timeline-date">February 24, 2026</div>
+        <div class="tag">Customs refusal — A Bike Thing's fault</div>
+        <div class="timeline-title">DHL contacts me: package rejected at Mexican customs</div>
+        <div class="timeline-body">
+          Mexican customs informed DHL that the package could not be cleared because it contained <strong>an undeclared food item — a candy</strong> — not listed on the commercial invoice. This is a well-known customs regulation. A Bike Thing chose to include this item without declaring it. DHL provided photographs of the candy as evidence.
+          <br><br>
+          I immediately emailed A Bike Thing with the DHL photos attached, explained the situation, and asked a simple question: <em>could they reship without the candy while the original package makes its way back?</em>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot red"></div>
+        <div class="timeline-date">February 25, 2026</div>
+        <div class="tag">First "no exceptions"</div>
+        <div class="timeline-title">A Bike Thing admits the candy — and refuses to help</div>
+        <div class="timeline-body">
+          Gary from A Bike Thing replied acknowledging that they routinely add candy to shipments to Mexico, and that none had previously been refused. Despite admitting their practice caused the problem, <em>he refused to reship</em> and stated they would wait for the original package to return.
+          <br><br>
+          Direct quote: <strong>"We cannot send you another package, and we'll have to wait until the original one has been returned, no exceptions I'm afraid."</strong>
+          <br><br>
+          No apology for the delay beyond a brief acknowledgment. No offer of any remedy. A policy applied to a problem of their own making.
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">March 24, 2026</div>
+        <div class="tag">Follow-up — 28 days later</div>
+        <div class="timeline-title">Nearly a month passes — still no refund on American Express</div>
+        <div class="timeline-body">
+          Almost a full month after the customs rejection, I followed up asking whether the refund had been issued on their end. The amount had not appeared on my American Express statement. This was a follow-up on a refund that should have been issued the moment it was clear the package was not going to be delivered.
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot red"></div>
+        <div class="timeline-date">March 25, 2026</div>
+        <div class="tag">Second "no exceptions"</div>
+        <div class="timeline-title">A Bike Thing: "We haven't received the package back yet"</div>
+        <div class="timeline-body">
+          Jordan from A Bike Thing responded: the returned package hadn't arrived at their warehouse, so no refund would be issued. They escalated the matter with DHL internally.
+          <br><br>
+          My response was direct: <em>"I cannot be held hostage with my payment when I never received the package. If it was held at customs or lost on its way back, I cannot be responsible for this."</em>
+          <br><br>
+          I asked for an immediate refund while the DHL issue was resolved. The response was more inflexibility — and another request for the DHL contact details that had already been provided on February 24.
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot red"></div>
+        <div class="timeline-date">March 27, 2026</div>
+        <div class="tag">Ongoing refusal</div>
+        <div class="timeline-title">Jordan repeats the same position — asks for info already provided</div>
+        <div class="timeline-body">
+          A Bike Thing once again declined to refund, and asked me to forward the email address or phone number from the DHL correspondence — information I had already attached in my very first email on February 24. After 31 days, they still had not reviewed the original evidence submitted.
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot red"></div>
+        <div class="timeline-date">April 5, 2026</div>
+        <div class="tag black">Escalation</div>
+        <div class="timeline-title">Chargeback filed with American Express. Final Notice sent.</div>
+        <div class="timeline-body">
+          Having exhausted all reasonable attempts to resolve this directly, I filed a formal chargeback dispute with American Express for the full amount of £226.04, with all documentation submitted as evidence.
+          <br><br>
+          A formal Final Notice email was simultaneously sent to A Bike Thing, giving them <strong>72 hours</strong> to confirm a refund or face public documentation of this experience and escalation to UK Trading Standards and Citizens Advice.
+          <br><br>
+          A Bike Thing's support system confirmed receipt of the Final Notice at 8:27 PM the same day.
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<!-- EMAIL CHAIN -->
+<div class="container">
+  <section class="emails-section">
+    <div class="section-label">Primary source documentation</div>
+    <h2>The Complete Email Record</h2>
+    <p class="intro-text">All emails are reproduced in full, in chronological order. Nothing has been edited or omitted.</p>
+
+    <!-- CHAIN 1 -->
+    <div class="chain-label">Email Chain 1 — The Customs Incident & First Refusal</div>
+
+    <div class="email-card">
+      <div class="email-header">
+        <div class="email-avatar avatar-jg">JG</div>
+        <div class="email-meta">
+          <div class="email-from">Javier Garza → support@abikething.com</div>
+          <div class="email-date">February 24, 2026 · 19:36 GMT</div>
+        </div>
+      </div>
+      <div class="email-body">Hi!
+
+This is Javier Garza from order number 144152. The package reached México customs safely but DHL contacted me because there was a candy that was added to the order that was not declared in the invoice. Believe it or not, this is reason enough for customs not to clear the package so they told me the package will be returned to origin. You should probably receive it back in the UK later this week.
+
+Unfortunately this will take some time that I don't have. Is it possible for you to send me another package WITHOUT any candy while you wait to receive this one? I assume DHL will send you a notification saying the package is returning. It is very very important not to include any food item or anything that is not declared in the invoice as otherwise customs won't process it.
+
+Thanks!
+Javier
+
+P.S. I'm attaching the images that DHL sent me of such undeclared candy.
+[Attachments: 3 photographs from DHL showing the undeclared candy]</div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header">
+        <div class="email-avatar avatar-abt">AB</div>
+        <div class="email-meta">
+          <div class="email-from">Gary — A Bike Thing → jgb2000@yahoo.com</div>
+          <div class="email-date">February 25, 2026 · 09:32 GMT</div>
+        </div>
+      </div>
+      <div class="email-body">Hi Javier,
+
+Apologies, for the issues you're having, in all the time we've been adding a single candy to hundreds of parcels we've sent to Mexico, we've never had one refused.
+
+Unfortunately we cannot send you another package, and we'll have to wait until the original one has been returned, no exceptions I'm afraid.
+
+<div class="highlight">"We cannot send you another package, and we'll have to wait until the original one has been returned, no exceptions I'm afraid."
+— Gary, A Bike Thing · February 25, 2026</div>
+
+As and when the consignment is returned, we'll remove the candy, and once again apologies for the delay.
+
+Regards,
+Gary
+A Bike Thing | www.ABikeThing.com</div>
+    </div>
+
+    <!-- CHAIN 2 -->
+    <div class="chain-label">Email Chain 2 — The Refund Request & Ongoing Refusal</div>
+
+    <div class="email-card">
+      <div class="email-header">
+        <div class="email-avatar avatar-jg">JG</div>
+        <div class="email-meta">
+          <div class="email-from">Javier Garza → support@abikething.com</div>
+          <div class="email-date">March 24, 2026 · 17:31 GMT</div>
+        </div>
+      </div>
+      <div class="email-body">Hello Gary, I'm following up on my email from February 26 as my reimbursement hasn't been reflected in my American Express. Has this refund been issued on your side? It's almost been a month since.
+
+Javier</div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header">
+        <div class="email-avatar avatar-abt">AB</div>
+        <div class="email-meta">
+          <div class="email-from">Jordan — A Bike Thing → jgb2000@yahoo.com</div>
+          <div class="email-date">March 25, 2026 · 10:16 GMT</div>
+        </div>
+      </div>
+      <div class="email-body">Good morning Javier,
+
+We have not yet received your returned shipment, which is why the refund has not been processed. We will escalate this matter with DHL to track down your package. Once we have it back, we will promptly issue your refund. We sincerely apologise for the delay and appreciate your patience.
+
+Regards,
+Jordan
+A Bike Thing | www.ABikeThing.com</div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header">
+        <div class="email-avatar avatar-jg">JG</div>
+        <div class="email-meta">
+          <div class="email-from">Javier Garza → support@abikething.com</div>
+          <div class="email-date">March 25, 2026 · 15:29 GMT</div>
+        </div>
+      </div>
+      <div class="email-body">Hi Jordan,
+
+I am sorry but I cannot be held hostage with my payment when I never received the package. If it was held at customs or lost in its way back, I cannot be responsible for this.
+
+If I would have received the package and decided to return it for any reason, then I completely understand it was a decision taken by me — but the package never arrived to my hands. Please refund the amount paid immediately while the issue with customs and DHL is resolved.
+
+Communication with A Bike Thing has been completely inflexible from your end when I asked for exceptions (been told twice already that you don't do any exceptions at all) so I will now hold equally from my end. I am not responsible for whatever is happening with DHL and in return please refund the amount paid.
+
+Send me proof that the refund has already been processed with no exceptions.
+
+Javier</div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header">
+        <div class="email-avatar avatar-abt">AB</div>
+        <div class="email-meta">
+          <div class="email-from">Jordan — A Bike Thing → jgb2000@yahoo.com</div>
+          <div class="email-date">March 25, 2026 · 16:29 GMT</div>
+        </div>
+      </div>
+      <div class="email-body">Good afternoon,
+
+We do understand how frustrating this is but to help expedite this matter could you forward us the correspondence / email address that you received the images from on the original email. This is highly unusual and if we could get in contact with them we may be able to sort out the return of the package and the refund swiftly.
+
+Regards,
+Jordan
+A Bike Thing | www.ABikeThing.com</div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header">
+        <div class="email-avatar avatar-jg">JG</div>
+        <div class="email-meta">
+          <div class="email-from">Javier Garza → support@abikething.com</div>
+          <div class="email-date">March 25, 2026 · 18:47 GMT</div>
+        </div>
+      </div>
+      <div class="email-body">As explained before, refund my credit card as I never received the package. I will report you to American Express and ask for a refund from them otherwise harming your credit history.
+
+Javier</div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header">
+        <div class="email-avatar avatar-abt">AB</div>
+        <div class="email-meta">
+          <div class="email-from">Jordan — A Bike Thing → jgb2000@yahoo.com</div>
+          <div class="email-date">March 27, 2026 · 10:33 GMT</div>
+        </div>
+      </div>
+      <div class="email-body">Good morning Javier,
+
+We truly understand your frustration, but unfortunately, we cannot issue a refund until the parcel is returned to us. We are actively working with DHL to locate your package. If you could kindly provide the email address or phone number from the correspondence that included the original pictures of the sweet, it might assist us and DHL in resolving this matter more quickly.
+
+<div class="highlight">Note: The photographic evidence from DHL — including the contact details requested here — was attached to my original email of February 24, 2026, over a month before this request was made.</div>
+
+Regards,
+Jordan
+A Bike Thing | www.ABikeThing.com</div>
+    </div>
+
+    <!-- FINAL NOTICE -->
+    <div class="chain-label">Final Notice — April 5, 2026</div>
+
+    <div class="email-card">
+      <div class="email-header">
+        <div class="email-avatar avatar-jg">JG</div>
+        <div class="email-meta">
+          <div class="email-from">Javier Garza → support@abikething.com + sales@abikething.com</div>
+          <div class="email-date">April 5, 2026 · 20:27 (local) · Confirmed delivered 20:27</div>
+        </div>
+      </div>
+      <div class="email-body">Subject: FINAL NOTICE – Order #144152 – Immediate Refund Required
+
+Dear Gary / Jordan and A Bike Thing Management,
+
+I am writing to formally notify you that this is my final attempt to resolve Order #144152 (£226.04, placed February 17, 2026) directly with your company before escalating through all available channels.
+
+To be unambiguous about the facts:
+
+1. My package was rejected by Mexican customs solely because your company included an undeclared food item (candy) in the shipment — an item not listed on the commercial invoice.
+2. I never received the goods. The failure was caused entirely by A Bike Thing, not by me.
+3. I reported this to you on February 24, 2026, with photographic evidence provided by DHL.
+4. It has now been over 40 days. I have not received a refund, nor a committed timeline for one.
+5. Your position — that you cannot refund until the package is physically returned to you — is unreasonable given that the return delay is a direct consequence of your own error.
+
+Please be advised that I have already taken the following action:
+
+• I have filed a formal chargeback dispute with American Express for the full amount of £226.04, with all email correspondence and documentation submitted as evidence.
+
+If a full refund is not confirmed to me in writing within 72 hours of this email, I will proceed with the following additional steps:
+
+• Filing a formal complaint with UK Trading Standards and Citizens Advice regarding your business practices.
+• Publishing a fully documented account of this transaction — including the complete email chain — across public review platforms (Trustpilot, Google Reviews) and relevant cycling and motorcycle communities where your business is discussed.
+• Promoting this account across forums and social media channels to ensure prospective customers are aware of what occurred.
+
+I have no desire to damage your business's reputation if this can be resolved quickly and fairly. A refund of £226.04 is all that is required to close this matter immediately.
+
+Sincerely,
+Javier Garza · Order #144152</div>
+    </div>
+
+  </section>
+</div>
+
+<!-- VERDICT -->
+<div class="container">
+  <section class="verdict-section">
+    <div class="section-label">Assessment</div>
+    <div class="verdict-box">
+      <div class="section-label">The core problem with A Bike Thing's response</div>
+      <p>A Bike Thing added an undeclared food item to an international shipment bound for Mexico — a country with well-documented customs rules about undeclared goods. This was not an act of malice, but it was an act of negligence, and its direct consequence was that I never received £226.04 worth of merchandise.</p>
+      <p>What is striking is not just what happened, but <strong>how they responded before I even asked for a refund.</strong> The very first request — a simple ask to reship while the original package returned — was met immediately with "no exceptions." No assessment. No consideration. No customer service. A policy applied to a crisis they caused.</p>
+      <p>Forty days later, the same inflexibility remains. The refund is withheld until the package physically arrives back at their warehouse — a package that is lost somewhere in DHL's return chain because of their own customs error. <strong>The customer is being made to bear the financial consequence of the retailer's mistake.</strong></p>
+      <p>Any prospective buyer of A Bike Thing should be aware: if something goes wrong with your international order — even if it goes wrong because of their error — you may find yourself facing the same two words: <em>"No exceptions."</em></p>
+    </div>
+  </section>
+</div>
+
+<!-- CTA -->
+<div class="container">
+  <section class="cta-section">
+    <div class="section-label">Have you had a similar experience?</div>
+    <h2>Share This Page</h2>
+    <p>If you are considering purchasing from A Bike Thing, or if you have had a similar experience, this documentation is here for you to reference and share.</p>
+    <div class="cta-links">
+      <a href="https://www.trustpilot.com/review/abikething.com" target="_blank" class="cta-btn primary">Leave a Review on Trustpilot</a>
+      <a href="https://www.abikething.com" target="_blank" class="cta-btn secondary">A Bike Thing Website</a>
+    </div>
+  </section>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>All information on this page is factual and documented by the buyer, Javier Garza.</p>
+  <p>Order #144152 · abikething.com · Dispute filed April 5, 2026</p>
+  <p style="margin-top:10px; color:#444;">Contact the author: <a href="mailto:jgb2000@yahoo.com">jgb2000@yahoo.com</a></p>
+</footer>
+
+</body>
+</html>
