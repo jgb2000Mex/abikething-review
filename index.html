@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>A Bike Thing & the Art of "No Exceptions"</title>
-  <meta name="description" content="A documented consumer experience with A Bike Thing (abikething.com) — Order #144152. £226.04 paid. Product never received. Refund refused for 50+ days." />
+  <meta name="description" content="A documented consumer experience with A Bike Thing (abikething.com) — Order #144152. £226.04 paid. Product never received. Refund refused for 63 days until American Express intervened." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&display=swap" rel="stylesheet" />
@@ -26,6 +26,8 @@
       --ab-border: #8b1a1a;
       --note-bg: #fdf8ec;
       --note-border: #c9a227;
+      --resolved-bg: #e8f0e8;
+      --resolved-border: #4a7a4a;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -109,6 +111,7 @@
       color: var(--accent);
       line-height: 1;
     }
+    .stat-num.resolved { color: var(--jg-border); }
     .stat-label {
       font-size: 0.72rem;
       letter-spacing: 0.12em;
@@ -178,6 +181,26 @@
       margin-bottom: 2rem;
       font-size: 0.95rem;
     }
+
+    /* RESOLUTION BOX */
+    .resolution-box {
+      background: var(--resolved-bg);
+      border-left: 3px solid var(--resolved-border);
+      padding: 1.25rem 1.75rem;
+      margin-bottom: 2rem;
+      font-size: 0.92rem;
+    }
+    .resolution-box .res-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--jg-border);
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+    .resolution-box p { margin-bottom: 0.6rem; color: var(--ink-light); }
+    .resolution-box p:last-child { margin-bottom: 0; }
 
     /* NUMBERS */
     .numbers-grid {
@@ -252,6 +275,7 @@
     }
     .tl-entry.accent .tl-date::after { border-color: var(--accent); background: var(--accent); }
     .tl-entry.new-entry .tl-date::after { border-color: var(--note-border); background: var(--note-border); }
+    .tl-entry.resolved-entry .tl-date::after { border-color: var(--jg-border); background: var(--jg-border); }
     .tl-body {
       padding: 1.25rem 0 1.25rem 1.5rem;
       border-bottom: 1px solid var(--paper-mid);
@@ -270,6 +294,7 @@
     }
     .tl-entry.accent .tl-tag { background: var(--accent); }
     .tl-entry.new-entry .tl-tag { background: var(--note-border); color: var(--ink); }
+    .tl-entry.resolved-entry .tl-tag { background: var(--jg-border); color: #fff; }
     .tl-body h3 { margin: 0 0 0.3rem; font-size: 1rem; }
     .tl-body p { font-size: 0.9rem; color: var(--ink-light); margin-bottom: 0.5rem; }
     .tl-body p:last-child { margin-bottom: 0; }
@@ -486,9 +511,9 @@
   <p class="deck">How a UK retailer caused a customs failure with an undeclared candy — then refused to refund a customer who never received their product.</p>
   <div class="stats-bar">
     <div class="stat"><span class="stat-num">£226.04</span><span class="stat-label">Paid</span></div>
-    <div class="stat"><span class="stat-num">50+</span><span class="stat-label">Days without refund</span></div>
+    <div class="stat"><span class="stat-num">63</span><span class="stat-label">Days to recover funds</span></div>
     <div class="stat"><span class="stat-num">0</span><span class="stat-label">Times product received</span></div>
-    <div class="stat"><span class="stat-num">2×</span><span class="stat-label">"No exceptions" stated</span></div>
+    <div class="stat"><span class="stat-num resolved">Amex</span><span class="stat-label">Resolved the dispute</span></div>
   </div>
 </header>
 
@@ -508,10 +533,17 @@
   <!-- WHY -->
   <div class="section-rule"><h2>Why this page exists</h2></div>
   <section id="why">
+
+    <div class="resolution-box">
+      <span class="res-label">Update — April 21, 2026 · Resolved</span>
+      <p>The £226.04 was recovered on April 21, 2026 — 63 days after the order was placed — through an American Express chargeback dispute, not through any refund action taken by A Bike Thing.</p>
+      <p>This page remains published because the experience itself is relevant to anyone considering an international order from A Bike Thing. It is not suggested that A Bike Thing would never have refunded this amount — but based on their conduct throughout this dispute, any refund would have been issued entirely on their own terms and their own timeline, regardless of fault. Anyone facing a similar issue should be aware that A Bike Thing makes no exceptions, and that initiating a claim with your credit card provider may be the most reliable path to resolution.</p>
+    </div>
+
     <div class="intro-box">
-      <p>This is not a review. It is a documented record of how A Bike Thing (<a href="https://www.abikething.com" target="_blank" rel="noopener">abikething.com</a>) handled — and continues to handle — a situation entirely caused by their own error.</p>
+      <p>This is not a review. It is a documented record of how A Bike Thing (<a href="https://www.abikething.com" target="_blank" rel="noopener">abikething.com</a>) handled a situation entirely caused by their own error.</p>
       <p>In February 2026, I ordered two motorcycle accessories from A Bike Thing, a UK-based retailer. They shipped my order to Mexico, but included an undeclared food item (a candy) inside the package — an item not listed on the commercial invoice. Mexican customs rejected the shipment entirely because of this undeclared item. The package was never delivered to me.</p>
-      <p>From the moment I reported this, A Bike Thing's response has been the same, repeated phrase: <strong>"No exceptions."</strong> Not an apology backed by action. Not a refund. Not a reship. Just a policy, applied rigidly to a problem they created. Over 50 days later, I have not received my money back. Every email exchange is documented on this page, in chronological order, for anyone to read.</p>
+      <p>From the moment I reported this, A Bike Thing's response was the same repeated phrase: <strong>"No exceptions."</strong> Not an apology backed by action. Not a refund. Not a reship. Just a policy, applied rigidly to a problem they created. Every email exchange is documented on this page, in chronological order, for anyone to read.</p>
     </div>
   </section>
 
@@ -609,7 +641,18 @@
           <span class="tl-tag">Response sent</span>
           <h3>Correcting ABT's false PayPal chargeback claim — with evidence</h3>
           <p>A formal response was sent to A Bike Thing on April 9 disputing the PayPal claim categorically, attaching the order confirmation screenshot as proof that the payment method was a Credit/Debit Card. A Bike Thing was asked to provide documented evidence of the alleged PayPal chargeback and how it relates to a Credit/Debit Card transaction — evidence they cannot produce because the claim is false.</p>
-          <p>A Bike Thing has now acknowledged the package is back in their possession. All conditions they previously set for issuing the refund have been met. The refund remains outstanding.</p>
+          <p>A Bike Thing has acknowledged the package is back in their possession. All conditions they previously set for issuing the refund have been met. The refund remains outstanding.</p>
+        </div>
+      </div>
+
+      <div class="tl-entry resolved-entry">
+        <div class="tl-date">April 21<br>2026</div>
+        <div class="tl-body">
+          <span class="tl-tag">Resolved — via American Express</span>
+          <h3>£226.04 recovered — 63 days after purchase, through Amex dispute</h3>
+          <p>American Express resolved the chargeback dispute in my favour and credited the full amount of £226.04. The funds were recovered 63 days after the original order was placed on February 17, 2026.</p>
+          <p>The reimbursement came through the American Express dispute process — not through any refund initiated by A Bike Thing. To be fair, it is possible A Bike Thing would eventually have issued a refund directly; however, based on their conduct throughout this dispute, it would have been on their own terms and their own timeline, with no accommodation for the fact that the problem was entirely of their own making.</p>
+          <p>Anyone facing a similar situation with this retailer should be aware: filing a chargeback with your credit card provider is a legitimate and effective consumer protection tool, and in this case was the decisive step in recovering the funds.</p>
         </div>
       </div>
 
@@ -862,9 +905,9 @@
     <div class="assessment">
       <p>A Bike Thing added an undeclared food item to an international shipment bound for Mexico — a country with well-documented customs rules about undeclared goods. This was not an act of malice, but it was an act of negligence, and its direct consequence was that I never received £226.04 worth of merchandise.</p>
       <p>What is striking is not just what happened, but <strong>how they responded before I even asked for a refund.</strong> The very first request — a simple ask to reship while the original package returned — was met immediately with "no exceptions." No assessment. No consideration. No customer service. A policy applied to a crisis they caused.</p>
-      <p>Fifty days later, the same inflexibility remains — now combined with a new tactic: attributing a PayPal chargeback to a transaction that was <strong>never made through PayPal</strong>. The order was paid by Credit/Debit Card, as documented in the original order confirmation. A Bike Thing has not provided, and cannot provide, evidence linking the PayPal reference they cite to this transaction.</p>
-      <p><strong>The package has now been returned to A Bike Thing, by their own admission.</strong> Every condition they set for processing the refund has been met. Yet the refund remains outstanding, and a new, factually incorrect excuse has been introduced to justify further delay.</p>
-      <p>Any prospective buyer of A Bike Thing should be aware: if something goes wrong with your international order — even if it goes wrong because of their error — you may find yourself facing not just the words <em>"No exceptions,"</em> but invented reasons to avoid paying you back.</p>
+      <p>Over the following weeks, the same inflexibility continued — eventually combined with a factually incorrect claim that a PayPal chargeback was blocking the refund, when the order was paid by Credit/Debit Card and no PayPal transaction ever existed.</p>
+      <p><strong>The funds were ultimately recovered on April 21, 2026 — 63 days after purchase — through an American Express chargeback dispute, not through any refund action taken by A Bike Thing.</strong> To be fair, it is not claimed here that A Bike Thing would never have refunded the amount. It is possible they would have done so once the Amex dispute ran its course. But based on their conduct throughout, any refund would have come entirely on their own terms and timeline, with no accommodation for the fact that the problem was entirely of their own making.</p>
+      <p>Anyone ordering internationally from A Bike Thing should understand this clearly: if something goes wrong — even if it is entirely their fault — you will be told there are no exceptions. You will wait on their schedule, with no guaranteed timeline. <strong>The most effective protection is to pay by credit card and be prepared to use your card issuer's dispute process if needed.</strong> In this case, that was the decisive step, and it worked.</p>
     </div>
   </section>
 
@@ -882,7 +925,7 @@
 
 <footer>
   <p>All information on this page is factual and documented by the buyer, Javier Garza.</p>
-  <p>Order #144152 &nbsp;·&nbsp; abikething.com &nbsp;·&nbsp; Dispute filed April 5, 2026</p>
+  <p>Order #144152 &nbsp;·&nbsp; abikething.com &nbsp;·&nbsp; Resolved April 21, 2026 via American Express</p>
   <p>Contact the author: <a href="mailto:jgb2000@yahoo.com">jgb2000@yahoo.com</a></p>
 </footer>
 
